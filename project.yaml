@@ -1,25 +1,18 @@
-specVersion: 0.2.0
-name: subqAccountBalances
-version: 1.0.0
+specVersion: 0.0.1
 description: ''
 repository: ''
-schema:
-  file: ./schema.graphql
+schema: ./schema.graphql
 network:
-  genesisHash: '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3'
   endpoint: wss://polkadot.api.onfinality.io/public-ws
+  dictionary: https://api.subquery.network/sq/subquery/dictionary-polkadot
 dataSources:
-  - kind: substrate/Runtime
+  - name: main
+    kind: substrate/Runtime
     startBlock: 1
     mapping:
-      file: ./dist/index.js
       handlers:
-        - handler: handleBlock
-          kind: substrate/BlockHandler
         - handler: handleEvent
           kind: substrate/EventHandler
           filter:
             module: balances
             method: Deposit
-        - handler: handleCall
-          kind: substrate/CallHandler
